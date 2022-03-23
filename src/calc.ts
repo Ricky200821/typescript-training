@@ -1,3 +1,5 @@
+// node ./dist/calc.js 111 101 -
+
 import { calculate } from "./calculate"
 
 console.log('ricky"s binary calculator')

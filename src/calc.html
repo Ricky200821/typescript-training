@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ricky's calculator</title>
+</head>
+
+<body>
+    <h1>binary calculator</h1>
+    <h2>this is ricky's calculator</h2>
+    <p>it is simple and fun</p>
+    <a href="https://www.wikihow.com/Create-a-Simple-Web-Page-with-HTML">Built following these instructions</a>
+    <br>
+    <br>
+    <label for="firstBinary">First number:</label>
+    <input type="text" id="firstBinary"><br><br>
+    <label for="operation">Operation:</label>
+    <input type="text" id="operation"><br><br>
+    <label for="secondBinary">Second number:</label>
+    <input type="text" id="secondBinary"><br><br>
+    <button onclick="execCalc()">Enter</button>
+    <script>
+        var exports = {};
+    </script>
+    <script type="module" src="./calculate.js"></script>
+    <script>
+        function execCalc() {
+            const firstBinary = document.getElementById("firstBinary").value;
+            const secondBinary = document.getElementById("secondBinary").value;
+            const operation = document.getElementById("operation").value;
+            console.log(firstBinary)
+            console.log(secondBinary)
+            console.log(operation)
+            calculate('111', '101', '+')
+        }
+    </script>
+
+</html>
