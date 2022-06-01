@@ -1,16 +1,16 @@
 "use strict";
 // node ./dist/calc.js 111 101 -
 Object.defineProperty(exports, "__esModule", { value: true });
-const calculate_1 = require("./calculate");
+const calculate_one_file_1 = require("./calculate-one-file");
 console.log('ricky"s binary calculator');
 const firstNumber = process.argv[2];
 const secondNumber = process.argv[3];
 const operation = process.argv[4];
-if (operation !== '+' && operation !== '-' && operation !== '*') {
+if (operation !== '+' && operation !== '-' && operation !== '*' && operation !== '/') {
     console.error('operation not valid', operation);
     process.exit(1);
 }
-const result = (0, calculate_1.calculate)(firstNumber, secondNumber, operation);
+const result = (0, calculate_one_file_1.calculate)(firstNumber, secondNumber, operation);
 if (result === undefined) {
     console.error('one of the numbers is not binary');
     process.exit(1);

@@ -15,23 +15,61 @@
     <label for="firstBinary">First number:</label>
     <input type="text" id="firstBinary"><br><br>
     <label for="operation">Operation:</label>
-    <input type="text" id="operation"><br><br>
+    <select name="operation" id="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select><br><br>
     <label for="secondBinary">Second number:</label>
     <input type="text" id="secondBinary"><br><br>
     <button onclick="execCalc()">Enter</button>
+    <label hidden for="result">The result is:</label>
+    <input hidden type="text" id="result_input"><br><br>
+    <b id="result"></b>
     <script>
         var exports = {};
     </script>
-    <script type="module" src="./calculate.js"></script>
+    <script type="module" src="./calculate-one-file.js"></script>
     <script>
         function execCalc() {
-            const firstBinary = document.getElementById("firstBinary").value;
-            const secondBinary = document.getElementById("secondBinary").value;
+            const firstBinaryElement = document.getElementById("firstBinary");
+            const firstBinary = firstBinaryElement.value
+            const errorFirstBinaryId = "firstBinaryError"
+            const errorFirstBinary = document.getElementById(errorFirstBinaryId)
+            const secondBinaryElement = document.getElementById("secondBinary");
+            const secondBinary = secondBinaryElement.value
+            const errorSecondBinaryId = "secondBinaryError"
+            const errorSecondBinary = document.getElementById(errorSecondBinaryId)
+            if (errorSecondBinary !== null) {
+                errorSecondBinary.remove()
+            }
+            checkBinary(firstBinary, errorFirstBinaryId, firstBinaryElement)
+            checkBinary(secondBinary, errorSecondBinaryId, secondBinaryElement)
             const operation = document.getElementById("operation").value;
+            console.log(">>>>", operation)
             console.log(firstBinary)
             console.log(secondBinary)
             console.log(operation)
-            calculate('111', '101', '+')
+            const result = exports.calculate(firstBinary, secondBinary, operation)
+            if (result !== undefined) {
+                const resultInput = document.getElementById("result_input")
+                resultInput.value = result
+                resultInput.removeAttribute("hidden");
+                document.getElementById("result").innerText = result
+                console.log(result)
+            }
+        }
+
+        function checkBinary(binary, errorBinaryId, binaryElement) {
+            if (exports.isBinary(binary) === false) {
+                console.log("The binary is not a binary")
+                const errorBinary = document.createElement("p");
+                errorBinary.innerText = "the binary is not a binary"
+                errorBinary.setAttribute("id", errorBinaryId)
+                binaryElement.after(errorBinary)
+                document.getElementById(errorBinaryId).style.color = "red";
+            }
         }
     </script>
 
