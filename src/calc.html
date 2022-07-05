@@ -13,7 +13,9 @@
     <br>
     <br>
     <label for="firstBinary">First number:</label>
-    <input type="text" id="firstBinary"><br><br>
+    <input type="text" id="firstBinary" onkeyup="keyPressed()">
+    <p id="firstBinaryDecimal"></p>
+    <br><br>
     <label for="operation">Operation:</label>
     <select name="operation" id="operation">
         <option value="+">+</option>
@@ -22,7 +24,9 @@
         <option value="/">/</option>
     </select><br><br>
     <label for="secondBinary">Second number:</label>
-    <input type="text" id="secondBinary"><br><br>
+    <input type="text" id="secondBinary" onkeyup="keyPressed()">
+    <p id="secondBinaryDecimal"></p>
+    <br><br>
     <button onclick="execCalc()">Enter</button>
     <label hidden for="result">The result is:</label>
     <input hidden type="text" id="result_input"><br><br>
@@ -56,7 +60,7 @@
                 const resultInput = document.getElementById("result_input")
                 resultInput.value = result
                 resultInput.removeAttribute("hidden");
-                document.getElementById("result").innerText = result
+                document.getElementById("result").innerText = parseInt(result, 2)
                 console.log(result)
             }
         }
@@ -70,6 +74,33 @@
                 binaryElement.after(errorBinary)
                 document.getElementById(errorBinaryId).style.color = "red";
             }
+        }
+
+        function keyPressed() {
+            showBinary("firstBinary", "firstBinaryDecimal")
+            showBinary("secondBinary", "secondBinaryDecimal")
+        }
+
+        function showBinary(bin, binDec) {
+            const binaryField = document.getElementById(bin)
+            var value = binaryField.value
+            const binaryDecimal = document.getElementById(binDec)
+
+            for (c of value) {
+                if (c !== "1" && c !== "0") {
+                    binaryDecimal.innerText = "error"
+                    binaryDecimal.style.color = "red";
+                    console.log("Oh my God!")
+                    return
+                }
+            }
+            if (value.length === 0) {
+                binaryDecimal.innerText = ""
+                return
+            }
+            binaryDecimal.innerText = parseInt(value, 2)
+            binaryDecimal.style.color = "black";
+            console.log(Number(parseInt(value, 2)))
         }
     </script>
 
